@@ -1,10 +1,9 @@
 {
-    "repo_path": "C:\\Users\\hp\\Projects\\h4ck4thon\\pilox-backend-main",
+    "repo_path": "./your-repo",
     "authors": [
-      {"name": "Olamidipupo Favour", "email": "dipoagboola2019@gmail.com"},
-      {"name": "Akinlua", "email": "akinluaolorunfunminiyi@gmail.com"}
+
     ],
-    "commits": 20,
+    "commits": 35,
     "days_spread": 3,
     "push": true,
     "remote": "origin",
