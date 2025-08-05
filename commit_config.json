@@ -1,0 +1,13 @@
+{
+    "repo_path": "./your-repo",
+    "authors": [
+      {"name": "Olamidipupo Favour", "email": "dipoagboola2019@gmail.com"},
+      {"name": "Olamidipupo Favour", "email": "dipoagboola2019@gmail.com"}
+    ],
+    "commits": 20,
+    "days_spread": 10,
+    "push": true,
+    "remote": "origin",
+    "branch": "main"
+  }
+  
