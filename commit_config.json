@@ -1,12 +1,13 @@
 {
-    "repo_path": "./your-repo",
+    "repo_path": "C:\\Users\\hp\\Projects\\h4ck4thon\\pilox-backend-test",
     "authors": [
       {"name": "Olamidipupo Favour", "email": "dipoagboola2019@gmail.com"},
-      {"name": "Olamidipupo Favour", "email": "dipoagboola2019@gmail.com"}
+      {"name": "Ada Lovelace", "email": "ada@example.com"},
+      {"name": "Alan Turing", "email": "alan@example.com"}
     ],
     "commits": 20,
-    "days_spread": 10,
-    "push": true,
+    "days_spread": 7,
+    "push": false,
     "remote": "origin",
     "branch": "main"
   }
