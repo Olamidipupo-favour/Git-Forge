@@ -1,3 +1,5 @@
 gm/
 commit_config.json
 __pycache__/
+config.bat
+node_modules
