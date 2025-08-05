@@ -792,7 +792,7 @@ This project is licensed under the MIT License.
         else:
             return f'''# {file_path.split('/')[-1].replace('.md', '').title().replace('_', ' ')}
 
-This document provides information about {file_path.split('/')[-1].replace('.md', '').toLowerCase().replace('_', ' ')}.
+This document provides information about {file_path.split('/')[-1].replace('.md', '').lower().replace('_', ' ')}.
 
 ## Overview
 
@@ -919,8 +919,56 @@ setting3 = value3
         except Exception as e:
             raise Exception(f"Failed to push to {remote}/{branch}: {e}")
 
-    def run(self, days_ago: int = 0, commits: int = 10) -> None:
+    def _cleanup_temp_files(self) -> None:
+        """Remove all temporary files created during the forging process."""
+        try:
+            # Get all files in the repository
+            all_files = []
+            for root, dirs, files in os.walk(self.repo.working_dir):
+                # Skip .git directory
+                if '.git' in root:
+                    continue
+                    
+                for file in files:
+                    file_path = os.path.relpath(os.path.join(root, file), self.repo.working_dir)
+                    all_files.append(file_path)
+            
+            # Find temporary files created by this tool
+            temp_files = []
+            for file_path in all_files:
+                # Check if it's a temporary file created by our tool
+                if any(pattern in file_path for pattern in [
+                    '_0_', '_1_', '_2_', '_3_', '_4_', '_5_', '_6_', '_7_', '_8_', '_9_',
+                    '_10_', '_11_', '_12_', '_13_', '_14_', '_15_', '_16_', '_17_', '_18_', '_19_',
+                    '_v1', '_v2', '_v3', '_v4', '_v5'
+                ]):
+                    temp_files.append(file_path)
+            
+            # Remove temporary files
+            for temp_file in temp_files:
+                try:
+                    file_path = Path(self.repo.working_dir) / temp_file
+                    if file_path.exists():
+                        file_path.unlink()
+                        print(f"Cleaned up: {temp_file}")
+                except Exception as e:
+                    print(f"Failed to remove {temp_file}: {e}")
+            
+            if temp_files:
+                print(f"Cleaned up {len(temp_files)} temporary files")
+            else:
+                print("No temporary files found to clean up")
+                
+        except Exception as e:
+            print(f"Error during cleanup: {e}")
+
+    def run(self, days_ago: int = 0, commits: int = 10, cleanup: bool = True) -> None:
         """Run the git strategy to create commits."""
-        for i in range(commits):
-            self._create_commit(days_ago=days_ago, commit_index=i)
+        try:
+            for i in range(commits):
+                self._create_commit(days_ago=days_ago, commit_index=i)
+        finally:
+            # Clean up temporary files after the process
+            if cleanup:
+                self._cleanup_temp_files()
 

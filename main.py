@@ -5,6 +5,7 @@ from strategies import GitStrategy
 from typing import Optional, Dict, Any
 
 
+
 def load_config(config_path: Path) -> Dict[str, Any]:
     """Load configuration from JSON file."""
     try:
@@ -43,16 +44,22 @@ def load_config(config_path: Path) -> Dict[str, Any]:
     help='Override days spread from config'
 )
 @click.option(
-    '--dry-run', 
-    is_flag=True, 
+    '--dry-run',
+    is_flag=True,
     help='Show what would be done without actually creating commits'
 )
+@click.option(
+    '--no-cleanup',
+    is_flag=True,
+    help='Keep temporary files after the process (default: cleanup automatically)'
+)
 def main(
-    config: Path, 
-    repo_path: Optional[Path], 
-    commits: Optional[int], 
-    days_spread: Optional[int], 
-    dry_run: bool
+    config: Path,
+    repo_path: Optional[Path],
+    commits: Optional[int],
+    days_spread: Optional[int],
+    dry_run: bool,
+    no_cleanup: bool
 ) -> None:
     """
     GitMod - Generate fake git commits for testing and demonstration purposes.
@@ -90,12 +97,12 @@ def main(
             if config_data.get('push'):
                 click.echo(f"Would push to {config_data.get('remote', 'origin')}/{config_data.get('branch', 'main')}")
             return
-            
+        
         # Initialize strategy with config
         strategy = GitStrategy(str(final_repo_path), config_data)
-        
+
         # Run the strategy
-        strategy.run(days_ago=final_days_spread, commits=final_commits)
+        strategy.run(days_ago=final_days_spread, commits=final_commits, cleanup=not no_cleanup)
         
         click.echo(f"Successfully created {final_commits} commits in {final_repo_path}")
         
