@@ -1,7 +1,9 @@
 {
-    "repo_path": "./your-repo",
+    "repo_path": "C:\\Users\\hp\\Projects\\h4ck4thon\\pilox",
     "authors": [
-
+      {"name": "Olamidipupo Favour", "email": "dipoagboola2019@gmail.com"},
+      {"name": "Akinlua", "email": "akinluaolorunfunminiyi@gmail.com"},
+      {"name": "appdever01@gmail.com", "email": "appdever01@gmail.com"}
     ],
     "commits": 35,
     "days_spread": 3,
