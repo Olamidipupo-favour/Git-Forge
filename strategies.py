@@ -14,7 +14,6 @@ class GitStrategy:
         self.repo = Repo(repo_path)
         self.fake = Faker()
         self.config = config or {}
-        
         # Conventional commit types and their common patterns
         self.commit_types = {
             'feat': ['add', 'create', 'implement', 'introduce', 'new'],

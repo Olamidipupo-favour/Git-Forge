@@ -21,7 +21,7 @@ A smart Git commit generator that creates realistic, conventional commit message
 
 1. **Clone the repository**:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Olamidipupo-favour/Git-Forge
    cd GitMod
    ```
 
